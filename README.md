@@ -3,27 +3,31 @@ chinese autoform extension bot - front end
 
 ```
 extension/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
 ├── background/
 │   └── background.js
 ├── content/
 │   └── content.js
-├── models/
-│   ├── UserModel.js
-│   └── RegistrationModel.js
-├── views/
-│   └── RegistrationView.js
-├── controllers/
+├── controllers
 │   └── RegistrationController.js
+├── manifest.json
+├── models/
+│   ├── RegistrationModels.js
+│   ├── SiteModel.js
+│   └── UserModels.js
+├── popup/
+│   ├── popup.html
+│   └── popup.js
+├── README.md
 ├── services/
-│   ├── FormFiller.js
-│   └── AdBlocker.js
-└── utils/
-    └── PasswordGenerator.js
+│   ├── AdBlocker.js
+│   ├── ApiSevice.js
+│   ├── FormFIller.js
+│   └── StorageService.js
+├── utils/
+│   ├── PasswordGenerator.js
+│   └── Utils.js
+└── views/
+    └── RegistrationViews.js
 ```
 
 
@@ -33,5 +37,3 @@ senha personalizada, se deixado em branco a senha deve ser aleatoria
 e qual layout do site que vamos rodar
 
 vou fornecer novamente o arquivo html do form de login ele é do site: https://bra.com
-
-```html
