@@ -1,18 +1,13 @@
 class FormFiller {
-  static fill(data) {
-    const selectors = {
-      account: ".ant-select-search__field",
-      password: "input[type='password']",
-      name: "input[placeholder='Preencha o nome verdadeiro e torne -o conveniente para a retirada posterior!']",
-      agreement: ".ant-checkbox-input",
-      register: "button:contains('Registro')",
-    };
+  static fillForm(siteConfig, userData) {
+    const selectors = siteConfig.selectors;
 
-    this.fillField(selectors.account, data.username);
-    this.fillFields(selectors.password, data.password);
-    this.fillField(selectors.name, data.name);
-    this.checkBox(selectors.agreement);
-    this.clickButton(selectors.register);
+    this.fillField(selectors.username, userData.username);
+    this.fillField(selectors.password, userData.password);
+    this.fillField(selectors.name, userData.name);
+    this.fillField(selectors.email, userData.email);
+    this.checkAgreement(selectors.agreement);
+    this.submitForm(selectors.submitButton);
   }
 
   static fillField(selector, value) {
@@ -20,17 +15,12 @@ class FormFiller {
     if (field) field.value = value;
   }
 
-  static fillFields(selector, value) {
-    const fields = document.querySelectorAll(selector);
-    fields.forEach((field) => (field.value = value));
-  }
-
-  static checkBox(selector) {
+  static checkAgreement(selector) {
     const checkbox = document.querySelector(selector);
     if (checkbox && !checkbox.checked) checkbox.click();
   }
 
-  static clickButton(selector) {
+  static submitForm(selector) {
     const button = document.querySelector(selector);
     if (button) button.click();
   }
