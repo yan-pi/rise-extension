@@ -8,17 +8,21 @@
 
 <body>
   <h1>Auto Registration Bot</h1>
+  <select id="siteSelector"></select>
   <input type="checkbox" id="useRandomPassword"> Use random password
   <input type="checkbox" id="useSpecialChars"> Use special characters
   <input type="checkbox" id="activateAdBlocker"> Activate AdBlocker
   <button id="startRegistration">Start Registration</button>
   <div id="status"></div>
   <script src="../models/UserModel.js"></script>
-  <script src="../models/RegistrationModel.js"></script>
-  <script src="../views/RegistrationView.js"></script>
-  <script src="../controllers/RegistrationController.js"></script>
-  <script src="../utils/PasswordGenerator.js"></script>
-  <script src="popup.js"></script>
-</body>
+    <script src="../models/SiteModel.js"></script>
+    <script src="../views/RegistrationView.js"></script>
+    <script src="../controllers/RegistrationController.js"></script>
+    <script src="../services/ApiService.js"></script>
+    <script src="../services/StorageService.js"></script>
+    <script src="../utils/Util.js"></script>
+    <script src="../utils/PasswordGenerator.js"></script>
+    <script src="popup.js"></script>
+  </body>
 
 </html>
