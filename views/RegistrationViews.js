@@ -1,5 +1,6 @@
 class RegistrationView {
   constructor() {
+    this.siteSelector = document.getElementById('siteSelector');
     this.startButton = document.getElementById('startRegistration');
     this.statusDiv = document.getElementById('status');
     this.useRandomPasswordCheckbox = document.getElementById('useRandomPassword');
@@ -7,9 +8,19 @@ class RegistrationView {
     this.activateAdBlockerCheckbox = document.getElementById('activateAdBlocker');
   }
 
+  initializeSiteSelector(sites) {
+    sites.forEach(site => {
+      const option = document.createElement('option');
+      option.value = site.id;
+      option.textContent = site.name;
+      this.siteSelector.appendChild(option);
+    });
+  }
+
   bindStartRegistration(handler) {
     this.startButton.addEventListener('click', () => {
       const config = {
+        siteId: this.siteSelector.value,
         useRandomPassword: this.useRandomPasswordCheckbox.checked,
         useSpecialChars: this.useSpecialCharsCheckbox.checked,
         activateAdBlocker: this.activateAdBlockerCheckbox.checked
