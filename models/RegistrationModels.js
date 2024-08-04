@@ -1,4 +1,4 @@
-class RegistrationModel {
+export class RegistrationModel {
   generateUserData(useRandomPassword, useSpecialChars) {
     const username = `user_${Math.floor(Math.random() * 9000) + 1000}`;
     const password = useRandomPassword ? PasswordGenerator.generate(useSpecialChars) : "default_password";

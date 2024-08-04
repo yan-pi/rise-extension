@@ -1,7 +1,10 @@
-class UserModel {
-  constructor(username, password, name) {
-    this.username = username;
-    this.password = password;
-    this.name = name;
+export class UserModel {
+  static generateRandomUser() {
+    return {
+      username: Util.generateRandomString(8),
+      password: PasswordGenerator.generate(true),
+      name: Util.generateRandomName(),
+      email: Util.generateRandomEmail(),
+    };
   }
 }
