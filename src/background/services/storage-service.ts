@@ -1,15 +1,12 @@
+import browser from 'webextension-polyfill';
+
 export class StorageService {
   async set(key: string, value: any): Promise<void> {
-    return new Promise((resolve) => {
-      chrome.storage.local.set({ [key]: value }, resolve);
-    });
+    return browser.storage.local.set({ [key]: value });
   }
 
   async get(key: string): Promise<any> {
-    return new Promise((resolve) => {
-      chrome.storage.local.get([key], (result) => {
-        resolve(result[key]);
-      });
-    });
+    const result = await browser.storage.local.get([key]);
+    return result[key];
   }
 }

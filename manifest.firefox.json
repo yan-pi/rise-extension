@@ -1,54 +1,34 @@
 {
   "manifest_version": 2,
-  "name": "FocusPocus: Block Distractions & Stay Focused",
-  "description": "Stay focused as if under a magical spell.",
-  "version": "1.1.2",
-  "author": "@jotavetech",
-
-  "icons": {
-    "16": "assets/logo/icon-16.png",
-    "32": "assets/logo/icon-32.png",
-    "64": "assets/logo/icon-64.png",
-    "128": "assets/logo/icon-128.png"
-  },
-
-  "permissions": ["storage", "notifications"],
-
-  "browser_action": {
-    "default_icon": {
-      "16": "/assets/logo/icon-32.png",
-      "32": "/assets/logo/icon-32.png",
-      "48": "/assets/logo/icon-64.png",
-      "96": "/assets/logo/icon-128.png"
-    },
-    "default_popup": "/popup/index.html",
-    "default_title": "FocusPocus"
-  },
-
+  "name": "Ryse Extension",
+  "version": "1.0.0",
+  "description": "Ryse Extension for educational purposes",
+  "permissions": ["storage", "tabs", "<all_urls>"],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
-
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["/content/styles.css"]
+      "js": ["content.js"]
     }
   ],
-
-  "options_ui": {
-    "page": "/options/index.html",
-    "chrome_style": true,
-    "open_in_tab": true
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
   },
-
-  "content_security_policy": "script-src 'self'; object-src 'self'",
-
-  "web_accessible_resources": [
-    "/assets/logo/*",
-    "/popup/*",
-    "/options/*",
-    "/content/*"
-  ]
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
 }
