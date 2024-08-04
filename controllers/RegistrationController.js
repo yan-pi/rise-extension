@@ -1,7 +1,7 @@
-import SiteModel from '../models/SiteModel';
-import UserModel from '../models/UserModel';
-import ApiService from '../services/ApiService';
-import StorageService from '../services/StorageService';
+import SiteModel from "../models/SiteModel";
+import UserModel from "../models/UserModel";
+import ApiService from "../services/ApiService";
+import StorageService from "../services/StorageService";
 
 class RegistrationController {
   constructor(view) {
@@ -58,3 +58,5 @@ class RegistrationController {
     }
   }
 }
+
+export default RegistrationController;
