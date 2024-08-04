@@ -34,6 +34,7 @@ class Util {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
     let allChars = chars;
     if (useSpecialChars) allChars += specialChars;
 
@@ -43,3 +44,5 @@ class Util {
       .join("");
   }
 }
+
+export default Util;
