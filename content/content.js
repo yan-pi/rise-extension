@@ -24,3 +24,5 @@ function fillForm(data) {
 
   if (registerButton) registerButton.click();
 }
+
+export { fillForm };
