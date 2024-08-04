@@ -22,8 +22,10 @@ class RegistrationView {
       const config = {
         siteId: this.siteSelector.value,
         useRandomPassword: this.useRandomPasswordCheckbox.checked,
+        customPassword: document.getElementById('customPassword').value,
         useSpecialChars: this.useSpecialCharsCheckbox.checked,
-        activateAdBlocker: this.activateAdBlockerCheckbox.checked
+        activateAdBlocker: this.activateAdBlockerCheckbox.checked,
+        siteLayout: document.getElementById('siteLayout').value
       };
       handler(config);
     });
@@ -33,3 +35,5 @@ class RegistrationView {
     this.statusDiv.textContent = message;
   }
 }
+
+export default RegistrationView;
