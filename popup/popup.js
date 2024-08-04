@@ -1,5 +1,5 @@
-import RegistrationModel from '../models/RegistrationModel';
-import RegistrationView from '../views/RegistrationView';
+import RegistrationModel from '../models/RegistrationModels';
+import RegistrationView from '../views/RegistrationViews';
 import RegistrationController from '../controllers/RegistrationController';
 
 document.addEventListener("DOMContentLoaded", function () {
