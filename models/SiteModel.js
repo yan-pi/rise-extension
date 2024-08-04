@@ -1,4 +1,4 @@
-import PasswordGenerator from '../utils/PasswordGenerator';
+import Util from '../utils/Utils';
 
 export class SiteModel {
   static Layouts = {
@@ -19,7 +19,8 @@ export class SiteModel {
       throw new Error('Site not found');
     }
   
-    const password = customPassword || PasswordGenerator.generateRandomPassword();
+    const password = customPassword || Util.generatePassword();
+
     return {
       ...site,
       password,
