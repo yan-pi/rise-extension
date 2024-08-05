@@ -1,39 +1,18 @@
-export enum SiteLayout {
-  LAYOUT1 = "layout1",
-  // Add more layouts as needed
+import { User } from "./user";
+
+export interface FormField {
+  selector: string;
+  type: string;
+}
+
+export interface SiteConfig {
+  fields: FormField[];
 }
 
 export interface LayoutConfig {
-  usernameSelector: string;
-  passwordSelector: string;
-  firstNameSelector: string;
-  lastNameSelector: string;
-  emailSelector: string;
-  submitSelector: string;
-  loginUsernameSelector: string;
-  loginPasswordSelector: string;
-  loginSubmitSelector: string;
+  [key: string]: SiteConfig;
 }
 
-export const LayoutConfigs: Record<SiteLayout, LayoutConfig> = {
-  [SiteLayout.LAYOUT1]: {
-    usernameSelector: "#username",
-    passwordSelector: "#password",
-    firstNameSelector: "#firstName",
-    lastNameSelector: "#lastName",
-    emailSelector: "#email",
-    submitSelector: "#submit",
-    loginUsernameSelector: "#loginUsername",
-    loginPasswordSelector: "#loginPassword",
-    loginSubmitSelector: "#loginSubmit",
-  },
-  // Add more layouts as needed
-};
-
-export interface SiteConfig {
-  id: string;
-  name: string;
-  url: string;
-  apiEndpoint?: string;
-  layout: SiteLayout;
+export interface SiteStrategy {
+  fillForm(fields: FormField[], user: User): void;
 }
