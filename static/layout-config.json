@@ -1,0 +1,18 @@
+{
+  "site1": {
+    "fields": [
+      { "selector": "#username", "type": "text" },
+      { "selector": "#password", "type": "password" },
+      { "selector": "#confirm-password", "type": "password" },
+      { "selector": "#name", "type": "text" }
+    ]
+  },
+  "site2": {
+    "fields": [
+      { "selector": "#user_id", "type": "text" },
+      { "selector": "#user_pass", "type": "password" },
+      { "selector": "#user_pass2", "type": "password" },
+      { "selector": "#full_name", "type": "text" }
+    ]
+  }
+}
