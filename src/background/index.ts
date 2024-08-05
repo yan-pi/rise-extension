@@ -1,25 +1,45 @@
-import browser from "webextension-polyfill";
-import * as storageService from "./services/storage-service";
+import { RegistrationService } from "./services/registration-service";
 import { blockAds } from "../utils/ad-blocker";
+import { SiteStrategyFactory } from "./strategies/site-strategy";
+import { FormField } from "./models/site-layouts";
+import layoutConfig from "../../static/layout-config.json";
+import { LayoutConfig } from "./models/site-layouts";
+import { User } from "./models/user";
+import { generateEmail } from "../utils/email-generator";
+import { generateUsername } from "../utils/username-generator";
+import { generateRandomName } from "../utils/name-generator";
+import { generatePassword } from "../utils/password-generator";
 
-function onInstalled(): void {
-  console.log("Ryse Extension installed");
-}
+const config: LayoutConfig = layoutConfig;
 
-function handleMessage(
-  message: any,
-  sender: browser.Runtime.MessageSender
-): Promise<any> {
-  if (message.action === "blockAds") {
-    blockAds();
-    return Promise.resolve({ success: true });
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "startRegistration") {
+    const {
+      useRandomPassword,
+      useSpecialChars,
+      activateAdBlocker,
+      selectedSite,
+    } = message.data;
+
+    if (activateAdBlocker) {
+      blockAds();
+    }
+
+    const siteConfig = config[selectedSite as keyof LayoutConfig];
+    if (!siteConfig) {
+      console.error(`Configuração para o site ${selectedSite} não encontrada`);
+      return;
+    }
+
+    const fields: FormField[] = siteConfig.fields;
+    const strategy = SiteStrategyFactory.getStrategy(selectedSite);
+
+    const user: User = {
+      name: generateRandomName(),
+      email: generateEmail(generateUsername()),
+      username: generateUsername(),
+      password: generatePassword(useRandomPassword, useSpecialChars),
+    };
+    RegistrationService.registerUser(strategy, fields, user);
   }
-  return Promise.resolve();
-}
-
-function init(): void {
-  browser.runtime.onInstalled.addListener(onInstalled);
-  browser.runtime.onMessage.addListener(handleMessage);
-}
-
-init();
+});
