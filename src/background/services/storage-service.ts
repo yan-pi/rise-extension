@@ -1,12 +1,22 @@
-import browser from 'webextension-polyfill';
+import { User } from "../models/user";
 
 export class StorageService {
-  async set(key: string, value: any): Promise<void> {
-    return browser.storage.local.set({ [key]: value });
+  private users: User[] = [];
+
+  public addUser(user: User) {
+    this.users.push(user);
+    chrome.storage.local.set({ users: this.users });
   }
 
-  async get(key: string): Promise<any> {
-    const result = await browser.storage.local.get([key]);
-    return result[key];
+  public getUsers(): Promise<User[]> {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(["users"], (result) => {
+        if (result.users) {
+          resolve(result.users);
+        } else {
+          reject("No users found");
+        }
+      });
+    });
   }
 }
