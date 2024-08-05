@@ -3,6 +3,7 @@ import { User } from "./user";
 export interface FormField {
   selector: string;
   type: string;
+  value?: string; // Valor opcional para campos de select
 }
 
 export interface SiteConfig {

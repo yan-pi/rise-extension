@@ -1,55 +1,71 @@
-import browser from "webextension-polyfill";
-import { LayoutConfig } from "../models/SiteLayout";
-import { User } from "../services/userService";
+import { FormField } from "../background/models/site-layouts";
 
-function fillForm(layoutConfig: LayoutConfig, userData: User): void {
-  const setFieldValue = (selector: string, value: string) => {
-    const element = document.querySelector(selector) as HTMLInputElement;
-    if (element) {
-      element.value = value;
-    }
-  };
+// Interface para estratégias de preenchimento de formulário
+interface FormStrategy {
+  fillForm(
+    fields: FormField[],
+    user: { username: string; password: string; name: string; email: string }
+  ): void;
+}
 
-  setFieldValue(layoutConfig.firstNameSelector, userData.firstName);
-  setFieldValue(layoutConfig.lastNameSelector, userData.lastName);
-  setFieldValue(layoutConfig.usernameSelector, userData.username);
-  setFieldValue(layoutConfig.passwordSelector, userData.password);
-  setFieldValue(layoutConfig.emailSelector, userData.email);
-
-  const submitButton = document.querySelector(
-    layoutConfig.submitSelector
-  ) as HTMLButtonElement;
-  if (submitButton) {
-    submitButton.click();
+// Exemplo de uma estratégia de preenchimento para um site específico
+class Site1Strategy implements FormStrategy {
+  fillForm(
+    fields: FormField[],
+    user: { username: string; password: string; name: string; email: string }
+  ): void {
+    fields.forEach((field) => {
+      const element = document.querySelector(field.selector) as
+        | HTMLInputElement
+        | HTMLSelectElement
+        | null;
+      if (element) {
+        switch (field.type) {
+          case "text":
+            // Assumindo que você tem um campo de texto para username, name, e email
+            if (field.selector.includes("username")) {
+              (element as HTMLInputElement).value = user.username;
+            } else if (field.selector.includes("name")) {
+              (element as HTMLInputElement).value = user.name;
+            } else if (field.selector.includes("email")) {
+              (element as HTMLInputElement).value = user.email;
+            }
+            break;
+          case "password":
+            if (field.selector.includes("password")) {
+              (element as HTMLInputElement).value = user.password;
+            }
+            break;
+          case "checkbox":
+            (element as HTMLInputElement).checked = true;
+            break;
+          case "select":
+            (element as HTMLSelectElement).value = field.value || "";
+            break;
+        }
+      }
+    });
   }
 }
 
-function autoLogin(layoutConfig: LayoutConfig, userData: User): void {
-  const setFieldValue = (selector: string, value: string) => {
-    const element = document.querySelector(selector) as HTMLInputElement;
-    if (element) {
-      element.value = value;
-    }
-  };
-
-  setFieldValue(layoutConfig.loginUsernameSelector, userData.username);
-  setFieldValue(layoutConfig.loginPasswordSelector, userData.password);
-
-  const loginSubmitButton = document.querySelector(
-    layoutConfig.loginSubmitSelector
-  ) as HTMLButtonElement;
-  if (loginSubmitButton) {
-    loginSubmitButton.click();
-  }
-}
-
-browser.runtime.onMessage.addListener((message: any) => {
+// Adiciona um listener para quando a mensagem for recebida
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "fillForm") {
-    fillForm(message.layoutConfig, message.userData);
-    return Promise.resolve({ success: true });
-  } else if (message.action === "autoLogin") {
-    autoLogin(message.layoutConfig, message.userData);
-    return Promise.resolve({ success: true });
+    const { strategyName, fields, user } = message.data;
+
+    let strategy: FormStrategy;
+
+    // Seleciona a estratégia com base no nome
+    switch (strategyName) {
+      case "site1":
+        strategy = new Site1Strategy();
+        break;
+      // Adicione mais casos conforme necessário para outras estratégias
+      default:
+        console.error("Estratégia não encontrada:", strategyName);
+        return;
+    }
+
+    strategy.fillForm(fields, user);
   }
-  return Promise.resolve();
 });
