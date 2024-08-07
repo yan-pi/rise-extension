@@ -1,30 +1,22 @@
 {
-  "manifest_version": 2,
-  "name": "Auto Registration Bot",
+  "manifest_version": 3,
+  "name": "AutoForm Filler",
   "version": "1.0",
-  "description": "Automated registration for betting platforms",
+  "description": "Automatically fill and submit forms on various websites",
   "permissions": [
     "activeTab",
-    "storage",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "storage"
   ],
-  "browser_action": {
-    "default_popup": "popup/popup.html"
+  "action": {
+    "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["background/background.js"],
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": [
-        "content/content.js",
-        "services/FormFiller.js",
-        "utils/Util.js"
-      ]
+      "js": ["content.js"]
     }
   ]
 }
