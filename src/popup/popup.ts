@@ -30,9 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
       (layout) => layout.name === layoutSelector.value
     );
 
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]?.id !== undefined) {
-        chrome.tabs.sendMessage(tabs[0].id, {
+    if (selectedLayout) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tabId = tabs[0]?.id;
+        if (tabId === undefined) {
+          console.error("Não foi possível encontrar a aba ativa");
+          return;
+        }
+
+        chrome.tabs.sendMessage(tabId, {
           action: "fillForm",
           layout: selectedLayout,
           options: {
@@ -41,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enableAdBlocker: enableAdBlocker.checked,
           },
         });
-      }
-    });
+      });
+    }
   });
 });
