@@ -10,7 +10,7 @@ export function generateUserData(
 ): UserData {
   const userData: UserData = {};
 
-  layout.dataFields.forEach((field) => {
+  layout.dataFields.forEach((field: any) => {
     switch (field) {
       case "username":
         userData[field] = generateUsername();
@@ -31,6 +31,12 @@ export function generateUserData(
           userData["username"] || generateUsername()
         );
         break;
+      case "cpf":
+        userData[field] = generateCPF();
+        break;
+      case "phoneNumber":
+        userData[field] = generatePhoneNumber();
+        break;
       case "firstName":
         userData[field] = generateFirstName();
         break;
@@ -40,6 +46,7 @@ export function generateUserData(
       default:
         userData[field] = generateGenericData();
     }
+    console.log(`Generated data for ${field}: ${userData[field]}`);
   });
 
   return userData;
@@ -118,6 +125,21 @@ function generateFirstName(): string {
 function generateLastName(): string {
   const names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia"];
   return names[Math.floor(Math.random() * names.length)];
+}
+
+function generatePhoneNumber(): string {
+  // Generate a random two-digit area code between 11 and 99
+  const areaCode = Math.floor(Math.random() * 89) + 11;
+
+  // Generate a random nine-digit phone number
+  const phoneNumber = Math.floor(Math.random() * 900000000) + 100000000;
+
+  // Format the phone number in the pattern (XX) XXXXX-XXXX
+  const formattedPhoneNumber = `(${areaCode}) ${phoneNumber
+    .toString()
+    .slice(0, 5)}-${phoneNumber.toString().slice(5)}`;
+
+  return formattedPhoneNumber;
 }
 
 function generateGenericData(): string {

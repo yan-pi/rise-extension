@@ -17,19 +17,6 @@ export const siteLayouts: SiteLayout[] = [
     dataFields: ["username", "email", "password"],
   },
   {
-    name: "Generic Social Media",
-    selectors: {
-      form: "#signup-form",
-      username: "#username",
-      email: "#email",
-      password: "#password",
-      firstName: "#first-name",
-      lastName: "#last-name",
-      submit: "#submit-button",
-    },
-    dataFields: ["username", "email", "password", "firstName", "lastName"],
-  },
-  {
     name: "BraApp",
     selectors: {
       form: "form.ant-form",
@@ -44,5 +31,32 @@ export const siteLayouts: SiteLayout[] = [
     },
     dataFields: ["username", "password", "passwordConfirm", "realName"],
   },
+  {
+    name: "dd1998",
+    selectors: {
+      form: "form.ant-form",
+      username: "input[placeholder='Nome de Usuário']",
+      password: "input[type='password']",
+      passwordConfirm:
+        "input[placeholder='Confirme a senha novamente, o mesmo que a senha!']",
+      realName:
+        "input[placeholder='Preencha o nome verdadeiro e torne -o conveniente para a retirada posterior!']",
+      phoneNumber: "input[placeholder='Digite o Número do Celular']", // Verifique este seletor
+      submit: "button.ant-btn-primary",
+      agreeCheckbox: "input.ant-checkbox-input",
+    },
+    dataFields: [
+      "username",
+      "password",
+      "passwordConfirm",
+      "phoneNumber",
+      "realName",
+    ],
+  },
   // Add more layouts as needed
 ];
+
+siteLayouts.forEach((layout) => {
+  console.log("Selectors:", layout.selectors);
+  console.log("Data Fields:", layout.dataFields);
+});
