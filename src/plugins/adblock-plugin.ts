@@ -1,17 +1,18 @@
 import { Plugin } from "./plugin-interface";
 
 export class AdBlockerPlugin implements Plugin {
-  private enabled = true;
+  private enabled = false;
 
   enable(): void {
     this.enabled = true;
+    console.log("AdBlocker enabled");
     this.blockAds();
   }
 
   disable(): void {
+    console.log("AdBlocker disabled");
     this.enabled = false;
   }
-
   private blockAds(): void {
     if (!this.enabled) return;
 
