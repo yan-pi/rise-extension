@@ -128,16 +128,11 @@ function generateLastName(): string {
 }
 
 function generatePhoneNumber(): string {
-  // Generate a random two-digit area code between 11 and 99
   const areaCode = Math.floor(Math.random() * 89) + 11;
 
-  // Generate a random nine-digit phone number
   const phoneNumber = Math.floor(Math.random() * 900000000) + 100000000;
 
-  // Format the phone number in the pattern (XX) XXXXX-XXXX
-  const formattedPhoneNumber = `(${areaCode}) ${phoneNumber
-    .toString()
-    .slice(0, 5)}-${phoneNumber.toString().slice(5)}`;
+  const formattedPhoneNumber = `${areaCode}${phoneNumber}`;
 
   return formattedPhoneNumber;
 }
