@@ -66,7 +66,7 @@ class ContentScript {
   }
 
   private fillFormFields(
-    elements: { [key: string]: Element },
+    elements: { [key: string]: HTMLElement | null },
     userData: UserData
   ): void {
     for (const [key, element] of Object.entries(elements)) {
