@@ -10,7 +10,7 @@ export function generateUserData(
 ): UserData {
   const userData: UserData = {};
 
-  layout.dataFields.forEach((field: any) => {
+  layout.dataFields.forEach((field: string) => {
     switch (field) {
       case "username":
         userData[field] = generateUsername();
