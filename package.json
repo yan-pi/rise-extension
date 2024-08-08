@@ -1,14 +1,12 @@
 {
-  "name": "ryse-extension",
-  "version": "1.0.0",
-  "description": "Ryse Extension for educational purposes",
+  "name": "rise-extension",
+  "version": "1.2.3",
+  "description": "Rise Extension for educational purposes",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:chrome": "cross-env BROWSER_TARGET=chrome webpack --mode development",
-    "dev:firefox": "cross-env BROWSER_TARGET=firefox webpack --mode development",
-    "build:chrome": "cross-env BROWSER_TARGET=chrome webpack --mode production",
-    "build:firefox": "cross-env BROWSER_TARGET=firefox webpack --mode production",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
     "lint": "eslint src/**/*.ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
@@ -17,27 +15,20 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/eslint-parser": "^7.24.5",
-    "@types/toastify-js": "^1.12.3",
-    "@types/webextension-polyfill": "^0.10.7",
-    "copy-webpack-plugin": "^12.0.2",
-    "cross-env": "^7.0.3",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.4.5",
-    "webextension-polyfill": "^0.11.0",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
-    "@types/chrome": "^0.0.188",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.8.8",
-    "webpack-merge": "^5.9.0"
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    
+    "@types/chrome": "^0.0.269",
+    "copy-webpack-plugin": "^12.0.2"
   },
   "packageManager": "yarn@1.22.22"
 }

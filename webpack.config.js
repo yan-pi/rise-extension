@@ -1,16 +1,11 @@
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
-
-const browser = process.env.BROWSER_TARGET || "chrome";
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  devtool: "source-map",
   entry: {
-    popup: "./src/popup",
-    background: "./src/background",
-    content: "./src/content",
-    options: "./src/options",
+    background: "./src/background.ts",
+    content: "./src/content/content.ts",
+    popup: "./src/popup/popup.ts",
   },
   module: {
     rules: [
@@ -26,17 +21,14 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, `dist/${browser}`),
+    path: path.resolve(__dirname, "dist"),
   },
-  watch: true,
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env.BROWSER_TARGET": JSON.stringify(browser),
-    }),
-    new CopyWebpackPlugin({
+    new CopyPlugin({
       patterns: [
-        { from: `./manifest.${browser}.json`, to: "manifest.json" },
-        { from: "static" },
+        { from: "src/manifest.json", to: "manifest.json" },
+        { from: "src/popup/popup.html", to: "popup.html" },
+        { from: "src/popup/popup.css", to: "popup.css" },
       ],
     }),
   ],

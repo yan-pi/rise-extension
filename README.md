@@ -1,10 +1,10 @@
-# Ryse Extension
+# AutoForm Filler Extension (Rise Extension)
 
-**Ryse Extension** é uma ferramenta educacional projetada para automatizar o processo de registro em plataformas de apostas chinesas. Este projeto demonstra o uso de Webpack, TypeScript, e o padrão Strategy para preencher formulários de registro em diferentes sites.
+**Rise Extension** é uma ferramenta educacional projetada para automatizar o processo de preenchimento de formulários em várias plataformas online. Este projeto demonstra o uso de Webpack, TypeScript e uma abordagem modular para preencher formulários de registro em diferentes sites.
 
 ## Índice
 
-- [Ryse Extension](#ryse-extension)
+- [AutoForm Filler Extension (Rise Extension)](#autoform-filler-extension-rise-extension)
   - [Índice](#índice)
   - [Visão Geral](#visão-geral)
   - [Funcionalidades](#funcionalidades)
@@ -22,48 +22,49 @@
 
 ## Visão Geral
 
-A extensão do navegador Ryse foi projetada para:
-- Automatizar o preenchimento de formulários de registro em plataformas de apostas.
+A extensão AutoForm Filler foi projetada para:
+- Automatizar o preenchimento de formulários de registro em várias plataformas online.
 - Suportar múltiplos layouts de formulários através de configuração dinâmica.
-- Utilizar o padrão de projeto Strategy para lidar com diferentes sites.
+- Utilizar uma abordagem modular para lidar com diferentes sites.
+- Demonstrar boas práticas de desenvolvimento de extensões de navegador usando TypeScript e Webpack.
 
 ## Funcionalidades
 
 - **Geração de Dados de Usuário:**
-  - Geração de nomes aleatórios, e-mails e senhas.
+  - Geração de nomes de usuário, e-mails e senhas aleatórios.
 - **Preenchimento Automático de Formulários:**
   - Suporte a diferentes layouts de formulários de registro configuráveis.
 - **Configurações Dinâmicas:**
-  - Configurações de senha, como uso de caracteres especiais.
+  - Opções para usar senhas predefinidas ou geradas aleatoriamente.
 - **Bloqueio de Anúncios:**
-  - Bloqueio de anúncios e pop-ups durante o preenchimento de formulários.
-- **Persistência de Dados:**
-  - Armazenamento e gerenciamento de dados de usuários registrados localmente.
+  - Opção para bloquear anúncios e pop-ups durante o preenchimento de formulários.
+- **Interface de Usuário Simples:**
+  - Pop-up intuitivo para configuração e ativação da extensão.
 
 ## Instalação
 
 ### Clonando o Repositório
 
 ```bash
-git clone https://github.com/yan-pi/ryse-extension.git
-cd ryse-extension
+git clone https://github.com/yan-pi/rise-extension.hit
+cd rise-extension
 ```
 
 ### Instalando Dependências
 
-Certifique-se de ter o [Yarn](https://classic.yarnpkg.com/en/docs/install/) instalado. Em seguida, instale as dependências do projeto:
+Certifique-se de ter o [Node.js](https://nodejs.org/) e o [npm](https://www.npmjs.com/) instalados. Em seguida, instale as dependências do projeto:
 
 ```bash
-yarn install
+yarn
 ```
 
 ### Configuração
 
 1. **Webpack e TypeScript:**
-   - A configuração do Webpack e do TypeScript já está configurada no projeto. Ajuste conforme necessário no `webpack.config.js` e `tsconfig.json`.
+   - A configuração do Webpack e do TypeScript já está definida no projeto. Ajuste conforme necessário no `webpack.config.js` e `tsconfig.json`.
 
 2. **Layout Config:**
-   - Adicione as configurações específicas de layout para diferentes sites no arquivo `static/layout-config.json`.
+   - Adicione as configurações específicas de layout para diferentes sites no arquivo `src/config/site-layouts.ts`.
 
 ## Uso
 
@@ -72,61 +73,50 @@ yarn install
 Para compilar a extensão para desenvolvimento, use:
 
 ```bash
-yarn dev:chrome  # Para o Chrome
-yarn dev:firefox # Para o Firefox
+yarn run dev
 ```
 
 Para compilar o projeto para produção, use:
 
 ```bash
-yarn build:chrome  # Para o Chrome
-yarn build:firefox # Para o Firefox
+yarn run build
 ```
 
 ### Instalando a Extensão no Navegador
 
-1. Abra o navegador e vá para a página de extensões (chrome://extensions/ para Chrome, about:addons para Firefox).
-2. Ative o modo de desenvolvedor (no Chrome) ou clique em "Instalar Complementos" (no Firefox).
-3. Carregue a pasta `dist` como uma extensão descompactada.
+1. Abra o Chrome e vá para `chrome://extensions/`.
+2. Ative o "Modo do desenvolvedor" no canto superior direito.
+3. Clique em "Carregar sem compactação" e selecione a pasta `dist` do projeto.
 
 ### Configuração da Extensão
 
 - **Interface do Usuário:**
-  - Configure as opções de registro através da interface da extensão. Selecione o site e defina as preferências de senha.
+  - Configure as opções de preenchimento através da interface pop-up da extensão. Selecione o layout do site e defina as preferências de senha.
 
 ## Estrutura do Projeto
 
 ```
 ├── src
-│   ├── background
-│   │   ├── index.ts          # Código principal para o background script
-│   │   ├── models
-│   │   │   ├── site-layouts.ts  # Tipos e interfaces para layouts de site
-│   │   │   └── user.ts       # Interface do usuário
-│   │   └── services
-│   │       ├── registration-service.ts  # Serviço de registro
-│   │       ├── storage-service.ts       # Serviço de armazenamento
-│   │       └── user-service.ts          # Serviço de usuário
+│   ├── background.ts
 │   ├── content
-│   │   └── index.ts          # Código para o script de conteúdo
+│   │   └── content.ts
 │   ├── popup
-│   │   └── index.ts          # Código para o script do popup
-│   └── utils
-│       ├── ad-blocker.ts     # Funções para bloqueio de anúncios
-│       ├── email-generator.ts# Funções para geração de e-mails
-│       ├── form-filler.ts    # Funções para preenchimento de formulários
-│       ├── name-generator.ts # Funções para geração de nomes
-│       └── password-generator.ts # Funções para geração de senhas
-├── static
-│   ├── assets                # Arquivos estáticos
-│   ├── content
-│   │   └── styles.css        # Estilos para o script de conteúdo
-│   └── popup
-│       ├── index.html        # HTML para a interface do popup
-│       └── styles.css        # Estilos para a interface do popup
-├── tsconfig.json             # Configuração do TypeScript
-├── webpack.config.js         # Configuração do Webpack
-└── yarn.lock                 # Dependências do projeto
+│   │   ├── popup.html
+│   │   ├── popup.css
+│   │   └── popup.ts
+│   ├── utils
+│   │   ├── data-generator.ts
+│   │   └── element-selectors.ts
+│   ├── config
+│   │   └── site-layouts.ts
+│   └── plugins
+│       ├── plugin-interface.ts
+│       └── adblocker-plugin.ts
+├── dist
+├── webpack.config.js
+├── tsconfig.json
+├── package.json
+└── manifest.json
 ```
 
 ## Contribuição
@@ -134,11 +124,11 @@ yarn build:firefox # Para o Firefox
 Contribuições são bem-vindas! Para contribuir, siga estas etapas:
 
 1. Fork o repositório.
-2. Crie uma branch para a sua feature (`git checkout -b feature/your-feature`).
-3. Faça commit das suas alterações (`git commit -am 'Add some feature'`).
-4. Push para a branch (`git push origin feature/your-feature`).
+2. Crie uma branch para a sua feature (`git checkout -b feature/sua-feature`).
+3. Faça commit das suas alterações (`git commit -am 'Adiciona alguma feature'`).
+4. Push para a branch (`git push origin feature/sua-feature`).
 5. Abra um Pull Request.
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - consulte o [arquivo LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
