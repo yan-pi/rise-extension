@@ -1,10 +1,10 @@
-# AutoForm Filler Extension
+# AutoForm Filler Extension (Rise Extension)
 
-**AutoForm Filler Extension** é uma ferramenta educacional projetada para automatizar o processo de preenchimento de formulários em várias plataformas online. Este projeto demonstra o uso de Webpack, TypeScript e uma abordagem modular para preencher formulários de registro em diferentes sites.
+**Rise Extension** é uma ferramenta educacional projetada para automatizar o processo de preenchimento de formulários em várias plataformas online. Este projeto demonstra o uso de Webpack, TypeScript e uma abordagem modular para preencher formulários de registro em diferentes sites.
 
 ## Índice
 
-- [AutoForm Filler Extension](#autoform-filler-extension)
+- [AutoForm Filler Extension (Rise Extension)](#autoform-filler-extension-rise-extension)
   - [Índice](#índice)
   - [Visão Geral](#visão-geral)
   - [Funcionalidades](#funcionalidades)
@@ -46,8 +46,8 @@ A extensão AutoForm Filler foi projetada para:
 ### Clonando o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/autoform-filler-extension.git
-cd autoform-filler-extension
+git clone https://github.com/yan-pi/rise-extension.hit
+cd rise-extension
 ```
 
 ### Instalando Dependências
