@@ -1,6 +1,6 @@
 {
   "name": "ryse-extension",
-  "version": "1.0.0",
+  "version": "1.2.3",
   "description": "Ryse Extension for educational purposes",
   "main": "index.js",
   "scripts": {
