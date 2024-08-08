@@ -16,6 +16,7 @@ class ContentScript {
   private initMessageListener(): void {
     chrome.runtime.onMessage.addListener(
       (message: any, sender: any, sendResponse: any) => {
+        console.log("Received message:", message);
         if (message.action === "fillForm") {
           this.fillForm(message.layout, message.options);
           sendResponse({ success: true });
@@ -32,11 +33,18 @@ class ContentScript {
       enableAdBlocker: boolean;
     }
   ): Promise<void> {
+    console.log("Filling form with layout:", layout);
+    console.log("Options:", options);
+
     this.currentLayout = layout;
     const userData = generateUserData(this.currentLayout, options);
+    console.log("Generated user data:", userData);
+
     const elements = getElements(this.currentLayout.selectors);
+    console.log("Form elements:", elements);
 
     if (options.enableAdBlocker) {
+      console.log("Enabling ad blocker");
       this.adBlocker.enable();
     }
 
@@ -44,6 +52,7 @@ class ContentScript {
 
     // Check the agreement checkbox
     if (elements.agreeCheckbox instanceof HTMLInputElement) {
+      console.log("Checking agreement checkbox");
       elements.agreeCheckbox.checked = true;
     }
 
@@ -51,6 +60,7 @@ class ContentScript {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (elements.submit instanceof HTMLElement) {
+      console.log("Clicking submit button");
       elements.submit.click();
     }
   }
@@ -67,6 +77,8 @@ class ContentScript {
         element instanceof HTMLInputElement
       ) {
         element.value = userData[key] || "";
+        console.log(`Set value of ${key} to:`, element.value);
+
         // Dispatch input event to trigger any potential listeners
         element.dispatchEvent(new Event("input", { bubbles: true }));
       }
