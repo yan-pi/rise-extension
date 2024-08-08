@@ -6,17 +6,6 @@ export interface SiteLayout {
 
 export const siteLayouts: SiteLayout[] = [
   {
-    name: "Default",
-    selectors: {
-      form: "form",
-      username: "input[name='username']",
-      email: "input[type='email']",
-      password: "input[type='password']",
-      submit: "button[type='submit']",
-    },
-    dataFields: ["username", "email", "password"],
-  },
-  {
     name: "BraApp",
     selectors: {
       form: "form.ant-form",
@@ -42,7 +31,7 @@ export const siteLayouts: SiteLayout[] = [
       realName:
         "input[placeholder='Preencha o nome verdadeiro e torne -o conveniente para a retirada posterior!']",
       phoneNumber: "input[placeholder='Digite o Número do Celular']", // Verifique este seletor
-      submit: "button.ant-btn-primary",
+      submit: "button.van-button",
       agreeCheckbox: "input.ant-checkbox-input",
     },
     dataFields: [
@@ -53,7 +42,6 @@ export const siteLayouts: SiteLayout[] = [
       "realName",
     ],
   },
-  // Add more layouts as needed
 ];
 
 siteLayouts.forEach((layout) => {
