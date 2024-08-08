@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>AutoForm Filler</title>
+  <title>Rise Extension</title>
   <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
+
 <body>
-  <select id="layoutSelector"></select>
-  <input type="password" id="predefinedPassword" placeholder="Predefined Password (optional)">
-  <label>
-    <input type="checkbox" id="useRandomPassword"> Use Random Password
-  </label>
-  <label>
-    <input type="checkbox" id="enableAdBlocker"> Enable Ad Blocker
-  </label>
-  <button id="generateUser">Gerar Usuário</button>
+  <!-- <div class="form-group">
+    <p>Use Random Password</p>
+    <input type="checkbox" id="useRandomPassword">
+  </div> -->
+  <div class="container">
+    <h1>Rise - Chinesa Premium</h1>
+    <div class="flex-col" style="margin-bottom: 12px;">
+      <p>Select your sitelayout</p>
+      <label for="layoutSelector">
+        <select id="layoutSelector" class="input-selector"></select>
+      </label>
+    </div>
+    <div class="flex-col">
+      <p>Insert your custom password:</p>
+      <label for="predefinedPassword">
+        <input class="input-selector" type="password" id="predefinedPassword"
+          placeholder="Predefined Password (optional)">
+      </label>
+    </div>
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+      <p>Use Random Password</p>
+      <input type="checkbox" id="useRandomPassword">
+    </div>
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+      <p> Enable Ad Blocker</p>
+      <input type="checkbox" id="enableAdBlocker">
+    </div>
+    <div class="form-group">
+      <button id="generateUser" class="btn">Generate User</button>
+    </div>
+  </div>
   <script src="popup.js"></script>
 </body>
+
 </html>
