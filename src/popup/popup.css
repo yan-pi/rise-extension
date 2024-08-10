@@ -87,3 +87,8 @@ input[type="text"] {
 .btn:hover {
   background-color: #1a5482;
 }
+input:disabled {
+  opacity: 0.5;
+  border: solid 2px #ac3e3e;
+  cursor: not-allowed;
+}
