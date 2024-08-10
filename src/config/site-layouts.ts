@@ -26,7 +26,7 @@ export const siteLayouts: SiteLayout[] = [
       lastName:
         "input[placeholder*='sobrenome'], input[placeholder*='last name']",
       submit:
-        "button[type='submit'], button[placeholder*='enviar'], button[placeholder='Registro'], button[placeholder*='submit'], button.ant-btn-primary, button.ant-btn, button.ant-btn.ant-btn-primary.ant-btn-block.GaL3XJonIwzK4ZeJyCyq",
+        "button[type='submit'], button[placeholder*='enviar'], button[placeholder='Registro'], button[placeholder*='submit'], button.ant-btn-primary, button.ant-btn, button.ant-btn.ant-btn-primary.ant-btn-block.GaL3XJonIwzK4ZeJyCyq, button.ant-btn.ant-btn-primary.ant-btn-block.GaL3XJonIwzK4ZeJyCyq",
       agreeCheckbox:
         "input[type='checkbox'], input[placeholder*='concordo'], input[placeholder*='agree'], input.ant-checkbox-input",
     },
@@ -80,6 +80,22 @@ export const siteLayouts: SiteLayout[] = [
     ],
   },
 ];
+
+export const clickButtonWithSpan = (spanText: string): void => {
+  const spans = document.querySelectorAll("button span");
+  spans.forEach((span) => {
+    if (span.textContent && span.textContent.includes(spanText)) {
+      const button = span.closest("button");
+      if (button) {
+        button.click();
+        console.log("Clicked button with span:", spanText);
+      }
+    }
+  });
+};
+
+// Call the function with the "Registro" span text
+clickButtonWithSpan("Registro");
 
 siteLayouts.forEach((layout) => {
   console.log("Selectors:", layout.selectors);
