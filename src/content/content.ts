@@ -1,23 +1,22 @@
 import { SiteLayout } from "../config/site-layouts";
 import { generateUserData, UserData } from "../utils/data-generator";
-import { clickDepositButton } from "../config/site-layouts";
+import { clickDepositButton } from "../utils/clickers/click-deposit";
 import { getElements } from "../utils/element-selectors";
 import { AdBlockerPlugin } from "../plugins/adblock-plugin";
-import { clickButtonWithSpan } from "../config/site-layouts";
+import { clickButtonWithSpan } from "../utils/clickers/click-button-span";
 
 class ContentScript {
-  private currentLayout: SiteLayout | null; // Alterado para permitir null
+  private currentLayout: SiteLayout | null;
   private adBlocker: AdBlockerPlugin;
 
   constructor() {
     this.currentLayout = null;
     this.adBlocker = new AdBlockerPlugin();
-    this.initMessageListener();
+    this.init();
   }
 
   private init(): void {
     this.initMessageListener();
-    // Outras inicializações
   }
 
   private initMessageListener(): void {
@@ -36,6 +35,10 @@ class ContentScript {
             this.adBlocker.disable();
           }
           break;
+        case "clickButton":
+          clickButtonWithSpan(message.spanText);
+          sendResponse({ status: "Button clicked" });
+          break;
       }
       sendResponse({ success: true });
     });
@@ -48,33 +51,27 @@ class ContentScript {
       useRandomPassword: boolean;
     }
   ): Promise<void> {
-    // console.log("Filling form with layout:", layout);
-    // console.log("Options:", options);
-
     this.currentLayout = layout;
     const userData = generateUserData(this.currentLayout, options);
-    // console.log("Generated user data:", userData);
-
     const elements = getElements(this.currentLayout.selectors);
-    // console.log("Form elements:", elements);
-
     this.fillFormFields(elements, userData);
 
     if (elements.agreeCheckbox instanceof HTMLInputElement) {
-      // console.log("Checking agreement checkbox");
       elements.agreeCheckbox.checked = true;
     }
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    if (elements.submit instanceof HTMLElement) {
-      // console.log("Clicking submit button");
-      elements.submit.click();
-    }
+    // if (elements.submit instanceof HTMLElement) {
+    //   //console.log("Clicking submit button");
+    //   elements.submit.click();
+    // }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    try {
       clickButtonWithSpan("Registro");
-    });
+    } catch (error) {
+      console.error("Error clicking button with span: Registro", error);
+    }
   }
 
   private fillFormFields(
@@ -89,9 +86,7 @@ class ContentScript {
         element instanceof HTMLInputElement
       ) {
         element.value = userData[key] || "";
-        // console.log(`Set value of ${key} to:`, element.value);
 
-        // Dispatch input event to trigger any potential listeners
         element.dispatchEvent(new Event("input", { bubbles: true }));
       }
     }
