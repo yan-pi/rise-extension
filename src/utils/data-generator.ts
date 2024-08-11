@@ -4,6 +4,7 @@ import { generateEmail } from "./generators/generate-email";
 import { generateFirstName } from "./generators/generate-firstname";
 import { generateGenericData } from "./generators/generate-genericdata";
 import { generateLastName } from "./generators/generate-lastname";
+import { generatePhoneNumber } from "./generators/generate-phonenumber";
 import { generateRandomPassword } from "./generators/generate-random-password";
 import { generateRealName } from "./generators/generate-realname";
 import { generateUsername } from "./generators/generate-username";
