@@ -1,6 +1,12 @@
 import { siteLayouts } from "../config/site-layouts";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const enableAdBlockerCheckbox = document.getElementById(
+    "enableAdBlocker"
+  ) as HTMLInputElement;
+  const depositButton = document.getElementById(
+    "depositButton"
+  ) as HTMLButtonElement;
   const layoutSelector = document.getElementById(
     "layoutSelector"
   ) as HTMLSelectElement;
@@ -9,9 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ) as HTMLInputElement;
   const useRandomPassword = document.getElementById(
     "useRandomPassword"
-  ) as HTMLInputElement;
-  const enableAdBlocker = document.getElementById(
-    "enableAdBlocker"
   ) as HTMLInputElement;
   const generateUserButton = document.getElementById(
     "generateUser"
@@ -27,16 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set initial state of checkboxes to true
   useRandomPassword.checked = true;
-  enableAdBlocker.checked = true;
+  enableAdBlockerCheckbox.checked = true;
 
   // Disable predefined password input if useRandomPassword is checked
   predefinedPassword.disabled = useRandomPassword.checked;
 
   // Restore checkbox states from localStorage
+  const enableAdBlocker = document.getElementById(
+    "enableAdBlocker"
+  ) as HTMLInputElement;
   useRandomPassword.checked =
-    localStorage.getItem("useRandomPassword") === "true" || true;
-  enableAdBlocker.checked =
-    localStorage.getItem("enableAdBlocker") === "true" || true;
+    localStorage.getItem("useRandomPassword") === "true";
+  enableAdBlocker.checked = localStorage.getItem("enableAdBlocker") === "true";
 
   // Save checkbox states to localStorage when changed
   useRandomPassword.addEventListener("change", () => {
@@ -51,29 +56,81 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("enableAdBlocker", enableAdBlocker.checked.toString());
   });
 
-  generateUserButton.addEventListener("click", () => {
-    const selectedLayout = siteLayouts.find(
-      (layout) => layout.name === layoutSelector.value
-    );
+  // Event listener for enableAdBlockerCheckbox
+  if (enableAdBlockerCheckbox) {
+    enableAdBlockerCheckbox.addEventListener("change", () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tabId = tabs[0]?.id;
+        if (tabId !== undefined) {
+          chrome.tabs.sendMessage(tabId, {
+            action: "toggleAdBlocker",
+            enable: enableAdBlockerCheckbox.checked,
+          });
+        }
+      });
+    });
+  }
 
-    if (selectedLayout) {
+  // Event listener for depositButton
+  if (depositButton) {
+    depositButton.addEventListener("click", () => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const tabId = tabs[0]?.id;
         if (tabId === undefined) {
-          console.error("Não foi possível encontrar a aba ativa");
+          console.error("Unable to find the active tab");
           return;
         }
-
         chrome.tabs.sendMessage(tabId, {
-          action: "fillForm",
-          layout: selectedLayout,
-          options: {
-            predefinedPassword: predefinedPassword.value,
-            useRandomPassword: useRandomPassword.checked,
-            enableAdBlocker: enableAdBlocker.checked,
-          },
+          action: "clickDepositButton",
         });
       });
+    });
+  }
+
+  // Event listener for generateUserButton
+  if (generateUserButton) {
+    generateUserButton.addEventListener("click", () => {
+      const selectedLayout = siteLayouts.find(
+        (layout) => layout.name === layoutSelector.value
+      );
+
+      if (selectedLayout) {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          const tabId = tabs[0]?.id;
+          if (tabId === undefined) {
+            console.error("Unable to find the active tab");
+            return;
+          }
+
+          chrome.tabs.sendMessage(tabId, {
+            action: "fillForm",
+            layout: selectedLayout,
+            options: {
+              predefinedPassword: predefinedPassword.value,
+              useRandomPassword: useRandomPassword.checked,
+            },
+          });
+        });
+      }
+    });
+  }
+
+  // Check AdBlocker status
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tabId = tabs[0]?.id;
+    if (tabId === undefined) {
+      console.error("Unable to find the active tab");
+      return;
     }
+
+    chrome.tabs.sendMessage(
+      tabId,
+      { action: "checkAdBlockerStatus" },
+      (response) => {
+        if (response) {
+          console.log("AdBlocker enabled:", response.enabled);
+        }
+      }
+    );
   });
 });
