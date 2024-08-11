@@ -9,7 +9,7 @@ export function getElements(selectors: { [key: string]: string }): {
     const decodedSelector = decodeSpecialCharacters(selector);
     // console.log(`Searching for element with selector: ${decodedSelector}`);
     elements[key] = document.querySelector(decodedSelector);
-    console.log(`Element found:`, elements[key]);
+    //console.log(`Element found:`, elements[key]);
   }
 
   return elements;
