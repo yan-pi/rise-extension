@@ -81,37 +81,7 @@ export const siteLayouts: SiteLayout[] = [
   },
 ];
 
-export const clickButtonWithSpan = (spanText: string): void => {
-  const spans = document.querySelectorAll("button span");
-  spans.forEach((span) => {
-    if (span.textContent && span.textContent.includes(spanText)) {
-      const button = span.closest("button");
-      if (button) {
-        button.click();
-        console.log("Clicked button with span:", spanText);
-      }
-    }
-  });
-};
-
-export const clickDepositButton = (): void => {
-  const depositButtonSelector = "button.deposit-button";
-
-  const depositButton = document.querySelector(
-    depositButtonSelector
-  ) as HTMLButtonElement;
-  if (depositButton) {
-    depositButton.click();
-    console.log("Clicked deposit button");
-  } else {
-    console.error("Deposit button not found");
-  }
-};
-
-// Call the function with the "Registro" span text
-clickButtonWithSpan("Registro");
-
-siteLayouts.forEach((layout) => {
-  console.log("Selectors:", layout.selectors);
-  console.log("Data Fields:", layout.dataFields);
-});
+// siteLayouts.forEach((layout) => {
+//   console.log("Selectors:", layout.selectors);
+//   console.log("Data Fields:", layout.dataFields);
+// });
