@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const generateUserButton = document.getElementById(
     "generateUser"
   ) as HTMLButtonElement;
+  const autoRegisterCheckbox = document.getElementById(
+    "autoRegister"
+  ) as HTMLInputElement;
 
   // Populate layout selector
   siteLayouts.forEach((layout) => {
@@ -31,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set initial state of checkboxes to true
   useRandomPassword.checked = true;
   enableAdBlockerCheckbox.checked = true;
+  autoRegisterCheckbox.checked = true;
 
   // Disable predefined password input if useRandomPassword is checked
   predefinedPassword.disabled = useRandomPassword.checked;
@@ -42,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
   useRandomPassword.checked =
     localStorage.getItem("useRandomPassword") === "true";
   enableAdBlocker.checked = localStorage.getItem("enableAdBlocker") === "true";
+  autoRegisterCheckbox.checked = localStorage.getItem("autoRegister") === "true"; 
 
-  // Save checkbox states to localStorage when changed
   useRandomPassword.addEventListener("change", () => {
     localStorage.setItem(
       "useRandomPassword",
@@ -54,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enableAdBlocker.addEventListener("change", () => {
     localStorage.setItem("enableAdBlocker", enableAdBlocker.checked.toString());
+  });
+
+  autoRegisterCheckbox.addEventListener("change", () => {
+    localStorage.setItem("autoRegister", autoRegisterCheckbox.checked.toString());
   });
 
   // Event listener for enableAdBlockerCheckbox
