@@ -1,16 +1,24 @@
-/* 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-*/
-
 h1 {
   margin-bottom: 30px;
   text-align: center;
+}
+
+body {
+  background-color: #1d1d1d;
+  display: flex;
+  justify-content: center;
+  height: 380px;
+  width: 320px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  margin: 16px;
+}
+input:disabled {
+  opacity: 0.5;
+  border: solid 2px #ac3e3e;
+  cursor: not-allowed;
 }
 
 .flex-col {
@@ -30,23 +38,29 @@ h1 {
   margin-bottom: 20px;
 }
 
-body {
-  background-color: #1d1d1d;
-  display: flex;
-  justify-content: center;
-  height: 380px;
-  width: 320px;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  margin: 16px;
+
+.header{
+  margin-bottom: 12px;
 }
+
+.main-button{
+  background-color: #1e6aa5;
+  color: #fff;
+  border: none;
+  padding: 10px 110px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main-button:hover {
+  background-color: #1a5482;
+}
+
 
 .input-selector,
 input[type="text"] {
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -56,27 +70,18 @@ input[type="text"] {
 }
 
 .selector {
-  -webkit-appearance: none; /* Remove default styling in WebKit browsers */
-  -moz-appearance: none; /* Remove default styling in Firefox */
-  appearance: none; /* Remove default styling in modern browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon points="0,0 10,0 5,5" fill="white"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 10px;
-  padding-right: 30px; /* Add space for the arrow */
+  padding-right: 30px;
 }
 
-/* .input-selector {
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  width: 300px;
-  background-color: #2d2d2d;
-  color: #fff;
-} */
-
 .btn {
-  background-color: #1e6aa5;
+  background-color: #03375f;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -86,9 +91,4 @@ input[type="text"] {
 
 .btn:hover {
   background-color: #1a5482;
-}
-input:disabled {
-  opacity: 0.5;
-  border: solid 2px #ac3e3e;
-  cursor: not-allowed;
 }

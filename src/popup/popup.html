@@ -13,7 +13,7 @@
   </div> -->
   <div class="container">
     <h1>Rise - Chinesa Premium</h1>
-    <div class="flex-col" style="margin-bottom: 12px;">
+    <div class="flex-col header">
       <p>Select your sitelayout</p>
       <label for="layoutSelector">
         <select id="layoutSelector" class="input-selector"></select>
@@ -22,23 +22,29 @@
     <div class="flex-col">
       <p>Insert your custom password:</p>
       <label for="predefinedPassword">
-        <input class="input-selector" type="text" id="predefinedPassword"
-          placeholder="Predefined Password (optional)">
+        <input class="input-selector" type="text" id="predefinedPassword" placeholder="Predefined Password (optional)">
       </label>
     </div>
-    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-      <p>Use Random Password</p>
-      <input type="checkbox" id="useRandomPassword">
+    <div>
+      <div style="display: flex; justify-content: space-between;">
+        <p>Use Random Password</p>
+        <input type="checkbox" id="useRandomPassword">
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <p> Enable Ad Blocker</p>
+        <input type="checkbox" id="enableAdBlocker">
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <p>Auto Cadastro</p>
+        <input type="checkbox" id="autoRegister">
+      </div>
     </div>
-    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-      <p> Enable Ad Blocker</p>
-      <input type="checkbox" id="enableAdBlocker">
+    <div>
+      <button class="main-button" id="generateUser" class="btn">Generate User</button>
     </div>
-    <div class="form-group">
-      <button id="generateUser" class="btn">Generate User</button>
-    </div>
-    <div class="form-group">
+    <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 14px;">
       <button id="depositButton" class="btn">Depositar</button>
+      <button id="depositButton" class="btn">Sacar</button>
     </div>
     <p style="text-align: center; color: gray; margin-bottom: 12px;">v.: 1.3.4</p>
   </div>
