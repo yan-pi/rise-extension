@@ -55,7 +55,7 @@ export function generateUserData(
       default:
         userData[field] = generateGenericData();
     }
-    console.log(`Generated data for ${field}: ${userData[field]}`);
+    //console.log(`Generated data for ${field}: ${userData[field]}`);
   });
 
   return userData;
