@@ -1,5 +1,6 @@
 import { SiteLayout } from "../config/site-layouts";
 import { generateUserData, UserData } from "../utils/data-generator";
+import { clickDepositButton } from "../config/site-layouts";
 import { getElements } from "../utils/element-selectors";
 import { AdBlockerPlugin } from "../plugins/adblock-plugin";
 import { clickButtonWithSpan } from "../config/site-layouts";
@@ -14,16 +15,30 @@ class ContentScript {
     this.initMessageListener();
   }
 
+  private init(): void {
+    this.initMessageListener();
+    // Outras inicializações
+  }
+
   private initMessageListener(): void {
-    chrome.runtime.onMessage.addListener(
-      (message: any, sender: any, sendResponse: any) => {
-        // console.log("Received message:", message);
-        if (message.action === "fillForm") {
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      switch (message.action) {
+        case "clickDepositButton":
+          clickDepositButton();
+          break;
+        case "fillForm":
           this.fillForm(message.layout, message.options);
-          sendResponse({ success: true });
-        }
+          break;
+        case "toggleAdBlocker":
+          if (message.enable) {
+            this.adBlocker.enable();
+          } else {
+            this.adBlocker.disable();
+          }
+          break;
       }
-    );
+      sendResponse({ success: true });
+    });
   }
 
   private async fillForm(
@@ -31,7 +46,6 @@ class ContentScript {
     options: {
       predefinedPassword?: string;
       useRandomPassword: boolean;
-      enableAdBlocker: boolean;
     }
   ): Promise<void> {
     // console.log("Filling form with layout:", layout);
@@ -44,20 +58,13 @@ class ContentScript {
     const elements = getElements(this.currentLayout.selectors);
     // console.log("Form elements:", elements);
 
-    if (options.enableAdBlocker) {
-      // console.log("Enabling ad blocker");
-      this.adBlocker.enable();
-    }
-
     this.fillFormFields(elements, userData);
 
-    // Check the agreement checkbox
     if (elements.agreeCheckbox instanceof HTMLInputElement) {
       // console.log("Checking agreement checkbox");
       elements.agreeCheckbox.checked = true;
     }
 
-    // Small delay to simulate human interaction
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (elements.submit instanceof HTMLElement) {
