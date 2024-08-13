@@ -1,12 +1,12 @@
-import { SiteLayout } from "../config/site-layouts";
+import { SiteLayoutInteface } from "../interfaces/site-layout-interface";
 import { generateUserData, UserData } from "../utils/data-generator";
-import { clickDepositButton } from "../utils/clickers/click-deposit";
+import { handleDepositButton } from "../utils/handlers/handle-deposit-button";
 import { getElements } from "../utils/element-selectors";
 import { AdBlockerPlugin } from "../plugins/adblock-plugin";
-import { clickButtonWithSpan } from "../utils/clickers/click-button-span";
+import { handleButtonWithSpan } from "../utils/handlers/handle-span-button";
 
 class ContentScript {
-  private currentLayout: SiteLayout | null;
+  private currentLayout: SiteLayoutInteface | null;
   private adBlocker: AdBlockerPlugin;
 
   constructor() {
@@ -22,8 +22,8 @@ class ContentScript {
   private initMessageListener(): void {
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       switch (message.action) {
-        case "clickDepositButton":
-          clickDepositButton();
+        case "handleDepositButton":
+          handleDepositButton();
           break;
         case "fillForm":
           this.fillForm(message.layout, message.options);
@@ -36,7 +36,7 @@ class ContentScript {
           }
           break;
         case "clickButton":
-          clickButtonWithSpan(message.spanText);
+          handleButtonWithSpan(message.spanText);
           sendResponse({ status: "Button clicked" });
           break;
       }
@@ -45,7 +45,7 @@ class ContentScript {
   }
 
   private async fillForm(
-    layout: SiteLayout,
+    layout: SiteLayoutInteface,
     options: {
       predefinedPassword?: string;
       useRandomPassword: boolean;
@@ -62,13 +62,8 @@ class ContentScript {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // if (elements.submit instanceof HTMLElement) {
-    //   //console.log("Clicking submit button");
-    //   elements.submit.click();
-    // }
-
     try {
-      clickButtonWithSpan("Registro");
+      handleButtonWithSpan("Registro");
     } catch (error) {
       console.error("Error clicking button with span: Registro", error);
     }

@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
   useRandomPassword.checked =
     localStorage.getItem("useRandomPassword") === "true";
   enableAdBlocker.checked = localStorage.getItem("enableAdBlocker") === "true";
-  autoRegisterCheckbox.checked = localStorage.getItem("autoRegister") === "true"; 
+  autoRegisterCheckbox.checked =
+    localStorage.getItem("autoRegister") === "true";
 
   useRandomPassword.addEventListener("change", () => {
     localStorage.setItem(
@@ -61,7 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   autoRegisterCheckbox.addEventListener("change", () => {
-    localStorage.setItem("autoRegister", autoRegisterCheckbox.checked.toString());
+    localStorage.setItem(
+      "autoRegister",
+      autoRegisterCheckbox.checked.toString()
+    );
   });
 
   // Event listener for enableAdBlockerCheckbox
@@ -89,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
         chrome.tabs.sendMessage(tabId, {
-          action: "clickDepositButton",
+          action: "handleDepositButton",
         });
       });
     });

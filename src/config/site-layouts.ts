@@ -1,10 +1,6 @@
-export interface SiteLayout {
-  name: string;
-  selectors: { [key: string]: string };
-  dataFields: string[];
-}
+import { SiteLayoutInteface } from "../interfaces/site-layout-interface";
 
-export const siteLayouts: SiteLayout[] = [
+export const siteLayouts: SiteLayoutInteface[] = [
   {
     name: "Generic",
     selectors: {

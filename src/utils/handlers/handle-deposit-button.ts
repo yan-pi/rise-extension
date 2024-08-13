@@ -1,4 +1,4 @@
-export const clickDepositButton = (): void => {
+export const handleDepositButton = (): void => {
   const depositButtonSelector = "button.deposit-button";
 
   const depositButton = document.querySelector(

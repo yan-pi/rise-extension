@@ -1,4 +1,4 @@
-export const clickButtonWithSpan = (spanText: string): void => {
+export const handleButtonWithSpan = (spanText: string): void => {
   // const autoRegisterCheckbox = document.getElementById(
   //   "autoRegister"
   // ) as HTMLInputElement;
