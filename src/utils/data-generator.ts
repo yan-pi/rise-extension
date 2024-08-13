@@ -1,4 +1,5 @@
-import { SiteLayout } from "../config/site-layouts";
+
+import { SiteLayoutInteface } from "../interfaces/site-layout-interface";
 import { generateCPF } from "./generators/generate-cpf";
 import { generateEmail } from "./generators/generate-email";
 import { generateFirstName } from "./generators/generate-firstname";
@@ -14,7 +15,7 @@ export interface UserData {
 }
 
 export function generateUserData(
-  layout: SiteLayout,
+  layout: SiteLayoutInteface,
   options: { predefinedPassword?: string; useRandomPassword: boolean }
 ): UserData {
   const userData: UserData = {};
@@ -55,7 +56,6 @@ export function generateUserData(
       default:
         userData[field] = generateGenericData();
     }
-    //console.log(`Generated data for ${field}: ${userData[field]}`);
   });
 
   return userData;
