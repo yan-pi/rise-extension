@@ -1,4 +1,3 @@
-
 import { SiteLayoutInteface } from "../interfaces/site-layout-interface";
 import { generateCPF } from "./generators/generate-cpf";
 import { generateEmail } from "./generators/generate-email";
