@@ -1,3 +1,7 @@
+import { createLogger } from "../logger";
+
+const logger = createLogger();
+
 export const handleButtonWithSpan = (spanText: string): void => {
   // const autoRegisterCheckbox = document.getElementById(
   //   "autoRegister"
@@ -22,12 +26,12 @@ export const handleButtonWithSpan = (spanText: string): void => {
       if (button) {
         button.click();
         buttonClicked = true;
-        console.log("Clicked button with span:", spanText);
+        logger.info(`Clicked button with span: ${spanText}`);
       }
     }
   });
 
   if (!buttonClicked) {
-    console.error(`Button with span text "${spanText}" not found`);
+    logger.error(`Button with span text "${spanText}" not found`);
   }
 };

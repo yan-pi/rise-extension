@@ -8,6 +8,9 @@ import { generatePhoneNumber } from "./generators/generate-phonenumber";
 import { generateRandomPassword } from "./generators/generate-random-password";
 import { generateRealName } from "./generators/generate-realname";
 import { generateUsername } from "./generators/generate-username";
+import { createLogger } from "./logger";
+
+const logger = createLogger();
 
 export interface UserData {
   [key: string]: string;
@@ -55,6 +58,7 @@ export function generateUserData(
       default:
         userData[field] = generateGenericData();
     }
+    logger.info(`Generated data for field ${field}: ${userData[field]}`);
   });
 
   return userData;

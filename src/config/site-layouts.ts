@@ -1,4 +1,7 @@
 import { SiteLayoutInteface } from "../interfaces/site-layout-interface";
+import { createLogger } from "../utils/logger";
+
+const logger = createLogger();
 
 export const siteLayouts: SiteLayoutInteface[] = [
   {
@@ -77,7 +80,7 @@ export const siteLayouts: SiteLayoutInteface[] = [
   },
 ];
 
-// siteLayouts.forEach((layout) => {
-//   console.log("Selectors:", layout.selectors);
-//   console.log("Data Fields:", layout.dataFields);
-// });
+siteLayouts.forEach((layout) => {
+  logger.info(`Selectors: ${layout.selectors}`);
+  logger.info(`Data Fields: ${layout.dataFields}`);
+});

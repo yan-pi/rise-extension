@@ -4,6 +4,9 @@ import { handleDepositButton } from "../utils/handlers/handle-deposit-button";
 import { getElements } from "../utils/element-selectors";
 import { AdBlockerPlugin } from "../plugins/adblock-plugin";
 import { handleButtonWithSpan } from "../utils/handlers/handle-span-button";
+import { createLogger } from "../utils/logger";
+
+const logger = createLogger();
 
 class ContentScript {
   private currentLayout: SiteLayoutInteface | null;
@@ -51,12 +54,20 @@ class ContentScript {
       useRandomPassword: boolean;
     }
   ): Promise<void> {
+    logger.info(`Filling form with data: ${layout}`);
+    logger.info(`Options: ${options}`);
+
     this.currentLayout = layout;
     const userData = generateUserData(this.currentLayout, options);
+    logger.info(`Generated user data: ${userData}`);
+
     const elements = getElements(this.currentLayout.selectors);
+    logger.info(`Elements found: ${elements}`);
+
     this.fillFormFields(elements, userData);
 
     if (elements.agreeCheckbox instanceof HTMLInputElement) {
+      logger.info("Agreeing to terms and conditions");
       elements.agreeCheckbox.checked = true;
     }
 
@@ -65,7 +76,7 @@ class ContentScript {
     try {
       handleButtonWithSpan("Registro");
     } catch (error) {
-      console.error("Error clicking button with span: Registro", error);
+      logger.error(`Error clicking button with span: Registro ${error}`);
     }
   }
 

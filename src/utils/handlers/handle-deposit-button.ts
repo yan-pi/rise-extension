@@ -1,3 +1,7 @@
+import { createLogger } from "../logger";
+
+const logger = createLogger();
+
 export const handleDepositButton = (): void => {
   const depositButtonSelector = "button.deposit-button";
 
@@ -6,8 +10,8 @@ export const handleDepositButton = (): void => {
   ) as HTMLButtonElement;
   if (depositButton) {
     depositButton.click();
-    console.log("Clicked deposit button");
+    logger.info("Clicked deposit button");
   } else {
-    console.error("Deposit button not found");
+    logger.error("Deposit button not found");
   }
 };
