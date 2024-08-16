@@ -9,7 +9,7 @@ export const siteLayouts: SiteLayoutInteface[] = [
     selectors: {
       form: "form.ant-form",
       username:
-        "input[name='username'], input[placeholder*='usuário'], input[placeholder*='username'], input.ant-select-search__field, input[placeholder='Nome de Usuário'], input[placeholder='Nome de Usuário']",
+        "input[name='username'], input[placeholder*='usuário'], input[placeholder*='username'], input.ant-select-search__field, input[placeholder='Nome de Usuário'], input[placeholder='Por favor, insira Conta']",
       password:
         "input[type='password'], input[placeholder*='senha'], input[placeholder*='password'], input[type='password'],input[type='password']",
       passwordConfirm:
