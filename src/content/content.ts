@@ -54,15 +54,15 @@ class ContentScript {
       useRandomPassword: boolean;
     }
   ): Promise<void> {
-    logger.info(`Filling form with data: ${layout}`);
-    logger.info(`Options: ${options}`);
+    logger.info(`Filling form with data: ${JSON.stringify(layout)}`);
+    logger.info(`Options: ${JSON.stringify(options)}`);
 
     this.currentLayout = layout;
     const userData = generateUserData(this.currentLayout, options);
-    logger.info(`Generated user data: ${userData}`);
+    console.log("Generated user data:", userData);
 
     const elements = getElements(this.currentLayout.selectors);
-    logger.info(`Elements found: ${elements}`);
+    console.log("Elements found:", elements);
 
     this.fillFormFields(elements, userData);
 

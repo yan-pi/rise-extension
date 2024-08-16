@@ -12,7 +12,7 @@ export function getElements(selectors: { [key: string]: string }): {
     const decodedSelector = decodeSpecialCharacters(selector);
     logger.info(`Generated data for field ${decodedSelector}`);
     elements[key] = document.querySelector(decodedSelector);
-    logger.info(`Element found: ${elements[key]}`);
+    console.log("Element found:", elements[key]);
   }
 
   return elements;

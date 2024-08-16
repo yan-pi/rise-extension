@@ -58,7 +58,9 @@ export function generateUserData(
       default:
         userData[field] = generateGenericData();
     }
-    logger.info(`Generated data for field ${field}: ${userData[field]}`);
+    logger.info(
+      `Generated data for field ${field}: ${JSON.stringify(userData[field])}`
+    );
   });
 
   return userData;
