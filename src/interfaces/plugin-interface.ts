@@ -1,4 +1,4 @@
 export interface Plugin {
-  enable(): void;
-  disable(): void;
+	enable(): void;
+	disable(): void;
 }

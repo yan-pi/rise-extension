@@ -1,6 +1,6 @@
 {
   "name": "rise-extension",
-  "version": "1.5.4",
+  "version": "1.7.4",
   "description": "Rise Extension for educational purposes",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
     "lint": "eslint src/**/*.ts",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "format:fix": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "keywords": [],
   "author": "@yan-pi",
