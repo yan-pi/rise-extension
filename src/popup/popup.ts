@@ -1,11 +1,11 @@
-import { setupEventListeners } from './dom-manipulation';
+import { initializePopup } from './setup/index';
 import { checkAdBlockerStatus } from './background-communication';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger();
 
 document.addEventListener('DOMContentLoaded', () => {
-	setupEventListeners();
+	initializePopup();
 
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 		const tabId = tabs[0]?.id;
