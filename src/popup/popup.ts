@@ -1,19 +1,19 @@
-import { setupEventListeners } from "./dom-manipulation";
-import { checkAdBlockerStatus } from "./background-communication";
-import { createLogger } from "../utils/logger";
+import { setupEventListeners } from './dom-manipulation';
+import { checkAdBlockerStatus } from './background-communication';
+import { createLogger } from '../utils/logger';
 
 const logger = createLogger();
 
-document.addEventListener("DOMContentLoaded", () => {
-  setupEventListeners();
+document.addEventListener('DOMContentLoaded', () => {
+	setupEventListeners();
 
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const tabId = tabs[0]?.id;
-    if (!tabId) {
-      logger.error("Unable to find the active tab");
-      return;
-    }
+	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+		const tabId = tabs[0]?.id;
+		if (!tabId) {
+			logger.error('Unable to find the active tab');
+			return;
+		}
 
-    checkAdBlockerStatus(tabId);
-  });
+		checkAdBlockerStatus(tabId);
+	});
 });
