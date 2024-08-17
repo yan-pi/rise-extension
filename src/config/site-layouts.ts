@@ -1,5 +1,4 @@
 import { SiteLayoutInteface } from '../interfaces/site-layout-interface';
-import { createLogger } from '../utils/logger';
 
 export const siteLayouts: SiteLayoutInteface[] = [
 	{
