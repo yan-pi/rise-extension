@@ -1,10 +1,11 @@
 import { SiteLayoutInteface } from '../interfaces/site-layout-interface';
-import { generateUserData, UserData } from '../utils/data-generator';
+import { generateUserData } from '../utils/data-generator';
 import { handleDepositButton } from '../utils/handlers/handle-deposit-button';
 import { getElements } from '../utils/element-selectors';
 import { AdBlockerPlugin } from '../plugins/adblock-plugin';
 import { handleButtonWithSpan } from '../utils/handlers/handle-span-button';
 import { createLogger } from '../utils/logger';
+import { UserData } from '../interfaces/userdata-interface';
 
 const logger = createLogger();
 

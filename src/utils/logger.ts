@@ -1,9 +1,4 @@
-export enum LogLevel {
-	INFO = 'info',
-	WARN = 'warn',
-	ERROR = 'error',
-	DEBUG = 'debug'
-}
+import { LogLevel } from '../interfaces/enum-logger';
 
 export function createLogger(): {
 	setEnabled: (enabled: boolean) => void;

@@ -1,4 +1,5 @@
 import { SiteLayoutInteface } from '../interfaces/site-layout-interface';
+import { UserData } from '../interfaces/userdata-interface';
 import { generateCPF } from './generators/generate-cpf';
 import { generateEmail } from './generators/generate-email';
 import { generateFirstName } from './generators/generate-firstname';
@@ -11,10 +12,6 @@ import { generateUsername } from './generators/generate-username';
 import { createLogger } from './logger';
 
 const logger = createLogger();
-
-export interface UserData {
-	[key: string]: string;
-}
 
 export function generateUserData(
 	layout: SiteLayoutInteface,
