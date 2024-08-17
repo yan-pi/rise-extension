@@ -20,6 +20,7 @@ class ContentScript {
 
   private init(): void {
     this.initMessageListener();
+    this.checkAdBlockerStatusOnLoad();
   }
 
   private initMessageListener(): void {
@@ -32,11 +33,10 @@ class ContentScript {
           this.fillForm(message.layout, message.options);
           break;
         case "toggleAdBlocker":
-          if (message.enable) {
-            this.adBlocker.enable();
-          } else {
-            this.adBlocker.disable();
-          }
+          this.toggleAdBlocker(message.enable);
+          break;
+        case "checkAdBlockerStatus":
+          sendResponse({ enabled: this.adBlocker.isEnabled() });
           break;
         case "clickButton":
           handleButtonWithSpan(message.spanText);
@@ -80,6 +80,28 @@ class ContentScript {
     }
   }
 
+  private toggleAdBlocker(enable: boolean): void {
+    if (enable) {
+      this.adBlocker.enable();
+    } else {
+      this.adBlocker.disable();
+    }
+    logger.info(`AdBlocker ${enable ? "enabled" : "disabled"}`);
+  }
+
+  private checkAdBlockerStatusOnLoad(): void {
+    const adBlockerEnabled =
+      localStorage.getItem("adBlockerEnabled") === "true";
+    if (adBlockerEnabled) {
+      this.adBlocker.enable();
+    } else {
+      this.adBlocker.disable();
+    }
+    logger.info(
+      `AdBlocker status on load: ${adBlockerEnabled ? "enabled" : "disabled"}`
+    );
+  }
+
   private fillFormFields(
     elements: { [key: string]: HTMLElement | null },
     userData: UserData
@@ -100,3 +122,10 @@ class ContentScript {
 }
 
 new ContentScript();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const adBlocker = new AdBlockerPlugin();
+  if (adBlocker.isEnabled()) {
+    adBlocker.enable(); // This will reapply the rules
+  }
+});

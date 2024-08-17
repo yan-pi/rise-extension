@@ -1,7 +1,9 @@
 import { siteLayouts } from "../config/site-layouts";
+import { AdBlockerPlugin } from "../plugins/adblock-plugin";
 import { createLogger } from "../utils/logger";
 
 const logger = createLogger();
+const adBlocker = new AdBlockerPlugin();
 
 export function setupEventListeners() {
   const enableAdBlockerCheckbox = document.getElementById(
@@ -57,13 +59,6 @@ export function setupEventListeners() {
     predefinedPassword.disabled = useRandomPassword.checked;
   });
 
-  enableAdBlockerCheckbox.addEventListener("change", () => {
-    localStorage.setItem(
-      "enableAdBlocker",
-      enableAdBlockerCheckbox.checked.toString()
-    );
-  });
-
   autoRegisterCheckbox.addEventListener("change", () => {
     localStorage.setItem(
       "autoRegister",
@@ -71,19 +66,23 @@ export function setupEventListeners() {
     );
   });
 
-  if (enableAdBlockerCheckbox) {
-    enableAdBlockerCheckbox.addEventListener("change", () => {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const tabId = tabs[0]?.id;
-        if (tabId !== undefined) {
-          chrome.tabs.sendMessage(tabId, {
-            action: "toggleAdBlocker",
-            enable: enableAdBlockerCheckbox.checked,
-          });
-        }
-      });
+  const adBlockerEnabled = localStorage.getItem("adBlockerEnabled") === "true";
+  enableAdBlockerCheckbox.checked = adBlockerEnabled;
+
+  enableAdBlockerCheckbox.addEventListener("change", () => {
+    const enable = enableAdBlockerCheckbox.checked;
+    localStorage.setItem("adBlockerEnabled", enable.toString());
+
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tabId = tabs[0]?.id;
+      if (tabId !== undefined) {
+        chrome.tabs.sendMessage(tabId, {
+          action: "toggleAdBlocker",
+          enable: enable,
+        });
+      }
     });
-  }
+  });
 
   if (depositButton) {
     depositButton.addEventListener("click", () => {
