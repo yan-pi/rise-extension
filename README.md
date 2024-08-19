@@ -19,6 +19,7 @@
   - [Estrutura do Projeto](#estrutura-do-projeto)
   - [Contribuição](#contribuição)
   - [Licença](#licença)
+  - [Todo:](#todo)
 
 ## Visão Geral
 
@@ -160,3 +161,9 @@ Contribuições são bem-vindas! Para contribuir, siga estas etapas:
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Todo:
+- [ ] Adjust the codebase to use Auth and JWT
+- [ ] Study design patterns to made the codebase consistent
+- [ ] Add more plugins to handle different sites
+- [ ] Adjust the codebase to use OCP principles and SOLID principles
