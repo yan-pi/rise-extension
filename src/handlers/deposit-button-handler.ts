@@ -1,5 +1,5 @@
-import { createLogger } from '../logger';
-import { handleButtonWithSpan } from './handle-span-button';
+import { createLogger } from '../utils/logger';
+import { handleButtonWithSpan } from './span-button-handler';
 
 const logger = createLogger();
 
