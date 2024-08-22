@@ -1,6 +1,6 @@
 import { getElements } from './elements';
 import { toggleAdBlocker } from './adblocker';
-import { handleDepositButtonClick, handleGenerateUserClick } from './handlers';
+import { handleDepositButtonClick, handleGenerateUserClick } from './popup-message-handlers';
 
 export function setupEventListeners(elements: ReturnType<typeof getElements>) {
 	elements.useRandomPassword.addEventListener('change', () => {
