@@ -1,8 +1,7 @@
 import { handleDepositButton } from '../handlers/deposit-button-handler';
 import { fillForm } from './form-filler';
-import { toggleAdBlocker, isAdBlockerEnabled } from './ad-blocker';
+import { toggleAdBlocker, isAdBlockerEnabled } from './adblocker';
 import { handleButtonWithSpan } from '../handlers/span-button-handler';
-import { SiteLayoutInteface } from '../interfaces/site-layout-interface';
 
 export const initMessageListener = () => {
 	chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

@@ -25,5 +25,5 @@ export const checkAdBlockerStatusOnLoad = (): void => {
 };
 
 export const isAdBlockerEnabled = (): boolean => {
-	return true; // or false, depending on the desired logic
+	return true;
 };

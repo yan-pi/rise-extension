@@ -1,5 +1,5 @@
 import { initMessageListener } from './message-listener';
-import { checkAdBlockerStatusOnLoad } from './ad-blocker';
+import { checkAdBlockerStatusOnLoad } from './adblocker';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger();
