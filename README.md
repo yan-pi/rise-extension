@@ -105,6 +105,9 @@ yarn run build
 │   │   └── site-layouts.ts
 │   ├── content
 │   │   └── content.ts
+│   ├── handlers
+│   │   ├── deposit-button-handler.ts
+│   │   └── span-button-handler.ts
 │   ├── interfaces
 │   │   ├── enum-logger.ts
 │   │   ├── plugin-interface.ts
@@ -122,9 +125,9 @@ yarn run build
 │   │       ├── adblocker.ts
 │   │       ├── elements.ts
 │   │       ├── event-listeners.ts
-│   │       ├── handlers.ts
 │   │       ├── index.ts
-│   │       └── initial-state.ts
+│   │       ├── initial-state.ts
+│   │       └── popup-message-handlers.ts
 │   └── utils
 │       ├── data-generator.ts
 │       ├── decoder-selector.ts
@@ -139,9 +142,6 @@ yarn run build
 │       │   ├── generate-random-password.ts
 │       │   ├── generate-realname.ts
 │       │   └── generate-username.ts
-│       ├── handlers
-│       │   ├── handle-deposit-button.ts
-│       │   └── handle-span-button.ts
 │       └── logger.ts
 ├── tsconfig.json
 ├── webpack.config.js
