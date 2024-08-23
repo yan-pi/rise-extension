@@ -8,7 +8,7 @@ export function createLogger(): {
 	error: (message: string) => void;
 	debug: (message: string) => void;
 } {
-	let enabled = true; // Logging is enabled by default
+	let enabled = true;
 
 	function setEnabled(newEnabled: boolean): void {
 		enabled = newEnabled;
