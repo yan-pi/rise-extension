@@ -5,9 +5,9 @@ import { createLogger } from '../utils/logger';
 const logger = createLogger();
 
 const initContentScript = () => {
-  initMessageListener();
-  checkAdBlockerStatusOnLoad();
-  logger.info('Content script initialized');
+	initMessageListener();
+	checkAdBlockerStatusOnLoad();
+	logger.info('Content script initialized');
 };
 
 initContentScript();
