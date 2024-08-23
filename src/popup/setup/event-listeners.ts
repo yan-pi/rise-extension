@@ -12,11 +12,12 @@ export function setupEventListeners(elements: ReturnType<typeof getElements>) {
 		localStorage.setItem('autoRegister', elements.autoRegisterCheckbox.checked.toString());
 	});
 
-	elements.enableAdBlockerCheckbox.addEventListener('change', () => {
-		const enable = elements.enableAdBlockerCheckbox.checked;
-		localStorage.setItem('adBlockerEnabled', enable.toString());
-		toggleAdBlocker(enable);
-	});
+	if (elements.adBlockerCheckbox) {
+		elements.adBlockerCheckbox.addEventListener('change', () => {
+			toggleAdBlocker(elements.adBlockerCheckbox.checked);
+			localStorage.setItem('adBlockerEnabled', elements.adBlockerCheckbox.checked.toString());
+		});
+	}
 
 	if (elements.depositButton) {
 		elements.depositButton.addEventListener('click', handleDepositButtonClick);

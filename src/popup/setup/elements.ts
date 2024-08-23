@@ -2,7 +2,7 @@ import { siteLayouts } from '../../config/site-layouts';
 
 export function getElements() {
 	return {
-		enableAdBlockerCheckbox: document.getElementById('enableAdBlocker') as HTMLInputElement,
+		adBlockerCheckbox: document.getElementById('adBlockerCheckbox') as HTMLInputElement,
 		depositButton: document.getElementById('depositButton') as HTMLButtonElement,
 		generateUserButton: document.getElementById('generateUser') as HTMLButtonElement,
 		layoutSelector: document.getElementById('layoutSelector') as HTMLSelectElement,

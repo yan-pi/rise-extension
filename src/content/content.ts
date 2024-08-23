@@ -1,9 +1,9 @@
 import { SiteLayoutInteface } from '../interfaces/site-layout-interface';
 import { generateUserData } from '../utils/data-generator';
-import { handleDepositButton } from '../utils/handlers/handle-deposit-button';
+import { handleDepositButton } from '../handlers/deposit-button-handler';
 import { getElements } from '../utils/element-selectors';
 import { AdBlockerPlugin } from '../plugins/adblock-plugin';
-import { handleButtonWithSpan } from '../utils/handlers/handle-span-button';
+import { handleButtonWithSpan } from '../handlers/span-button-handler';
 import { createLogger } from '../utils/logger';
 import { UserData } from '../interfaces/userdata-interface';
 
@@ -11,11 +11,10 @@ const logger = createLogger();
 
 class ContentScript {
 	private currentLayout: SiteLayoutInteface | null;
-	private adBlocker: AdBlockerPlugin;
+	private adBlocker = AdBlockerPlugin();
 
 	constructor() {
 		this.currentLayout = null;
-		this.adBlocker = new AdBlockerPlugin();
 		this.init();
 	}
 
@@ -37,7 +36,7 @@ class ContentScript {
 					this.toggleAdBlocker(message.enable);
 					break;
 				case 'checkAdBlockerStatus':
-					sendResponse({ enabled: this.adBlocker.isEnabled() });
+					sendResponse({ enabled: this.adBlocker.enable() });
 					break;
 				case 'clickButton':
 					handleButtonWithSpan(message.spanText);
@@ -112,10 +111,3 @@ class ContentScript {
 }
 
 new ContentScript();
-
-document.addEventListener('DOMContentLoaded', () => {
-	const adBlocker = new AdBlockerPlugin();
-	if (adBlocker.isEnabled()) {
-		adBlocker.enable(); // This will reapply the rules
-	}
-});
