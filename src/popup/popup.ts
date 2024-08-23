@@ -1,6 +1,5 @@
 import { initializePopup } from './setup/index';
 import { checkAdBlockerStatus } from './background-communication';
-import { toggleAdBlocker } from './setup/adblocker';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger();
