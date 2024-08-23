@@ -6,7 +6,7 @@ export const siteLayouts: SiteLayoutInteface[] = [
 		selectors: {
 			form: 'form.ant-form',
 			username:
-				"input[name='username'], input[placeholder*='usuário'], input[placeholder*='username'], input.ant-select-search__field, input[placeholder='Nome de Usuário'], input[placeholder='Por favor, insira Conta'], input[autocomplete='new-password'][placeholder='Por favor, insira Conta '] ",
+				"input[name='username'], input[placeholder*='usuário'], input[placeholder*='username'], input.ant-select-search__field, input[placeholder='Nome de Usuário'], input[placeholder='Por favor, insira Conta'], input[autocomplete='new-password'][placeholder='Por favor, insira Conta'], input[placeholder='Por favor, insira Conta / Número do Celular']",
 			password:
 				"input[type='password'], input[placeholder*='senha'], input[placeholder*='password'], input[type='password'],input[type='password']",
 			passwordConfirm:
@@ -36,33 +36,6 @@ export const siteLayouts: SiteLayoutInteface[] = [
 			'lastName'
 		]
 	},
-	{
-		name: 'BraApp',
-		selectors: {
-			form: 'form.ant-form',
-			username: 'input.ant-select-search__field',
-			password: "input[type='password']",
-			passwordConfirm: "input[placeholder='Por favor, confirme sua senha novamente']",
-			realName: "input[placeholder='Preencha o nome verdadeiro e torne -o conveniente para a retirada posterior!']",
-			submit: 'button.ant-btn-primary',
-			agreeCheckbox: 'input.ant-checkbox-input'
-		},
-		dataFields: ['username', 'password', 'passwordConfirm', 'realName']
-	},
-	{
-		name: 'dd1998',
-		selectors: {
-			form: 'form.ant-form',
-			username: "input[placeholder='Nome de Usuário']",
-			password: "input[type='password']",
-			passwordConfirm: "input[placeholder='Confirme a senha novamente, o mesmo que a senha!']",
-			realName: "input[placeholder='Preencha o nome verdadeiro e torne -o conveniente para a retirada posterior!']",
-			phoneNumber: "input[placeholder='Digite o Número do Celular']", // Verifique este seletor
-			submit: 'button.van-button',
-			agreeCheckbox: 'input.ant-checkbox-input'
-		},
-		dataFields: ['username', 'password', 'passwordConfirm', 'phoneNumber', 'realName']
-	}
 ];
 
 siteLayouts.forEach(layout => {
