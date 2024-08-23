@@ -19,6 +19,7 @@
   - [Estrutura do Projeto](#estrutura-do-projeto)
   - [Contribuição](#contribuição)
   - [Licença](#licença)
+  - [Todo:](#todo)
 
 ## Visão Geral
 
@@ -96,27 +97,55 @@ yarn run build
 ## Estrutura do Projeto
 
 ```
-├── src
-│   ├── background.ts
-│   ├── content
-│   │   └── content.ts
-│   ├── popup
-│   │   ├── popup.html
-│   │   ├── popup.css
-│   │   └── popup.ts
-│   ├── utils
-│   │   ├── data-generator.ts
-│   │   └── element-selectors.ts
-│   ├── config
-│   │   └── site-layouts.ts
-│   └── plugins
-│       ├── plugin-interface.ts
-│       └── adblocker-plugin.ts
-├── dist
-├── webpack.config.js
-├── tsconfig.json
 ├── package.json
-└── manifest.json
+├── README.md
+├── src
+│   ├── background.ts
+│   ├── config
+│   │   └── site-layouts.ts
+│   ├── content
+│   │   └── content.ts
+│   ├── interfaces
+│   │   ├── enum-logger.ts
+│   │   ├── plugin-interface.ts
+│   │   ├── site-layout-interface.ts
+│   │   └── userdata-interface.ts
+│   ├── manifest.json
+│   ├── plugins
+│   │   └── adblock-plugin.ts
+│   ├── popup
+│   │   ├── background-communication.ts
+│   │   ├── popup.css
+│   │   ├── popup.html
+│   │   ├── popup.ts
+│   │   └── setup
+│   │       ├── adblocker.ts
+│   │       ├── elements.ts
+│   │       ├── event-listeners.ts
+│   │       ├── handlers.ts
+│   │       ├── index.ts
+│   │       └── initial-state.ts
+│   └── utils
+│       ├── data-generator.ts
+│       ├── decoder-selector.ts
+│       ├── element-selectors.ts
+│       ├── generators
+│       │   ├── generate-cpf.ts
+│       │   ├── generate-email.ts
+│       │   ├── generate-firstname.ts
+│       │   ├── generate-genericdata.ts
+│       │   ├── generate-lastname.ts
+│       │   ├── generate-phonenumber.ts
+│       │   ├── generate-random-password.ts
+│       │   ├── generate-realname.ts
+│       │   └── generate-username.ts
+│       ├── handlers
+│       │   ├── handle-deposit-button.ts
+│       │   └── handle-span-button.ts
+│       └── logger.ts
+├── tsconfig.json
+├── webpack.config.js
+└── yarn.lock
 ```
 
 ## Contribuição
@@ -132,3 +161,9 @@ Contribuições são bem-vindas! Para contribuir, siga estas etapas:
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Todo:
+- [ ] Adjust the codebase to use Auth and JWT
+- [ ] Study design patterns to made the codebase consistent
+- [ ] Add more plugins to handle different sites
+- [ ] Adjust the codebase to use OCP principles and SOLID principles

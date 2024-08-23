@@ -1,6 +1,6 @@
 {
   "name": "rise-extension",
-  "version": "1.7.4",
+  "version": "1.14.5",
   "description": "Rise Extension for educational purposes",
   "main": "index.js",
   "scripts": {

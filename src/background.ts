@@ -8,5 +8,4 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	logger.debug(`Received message: ${JSON.stringify(message)}`);
-	// Handle the message
 });
