@@ -4,8 +4,11 @@
   "version": "1.0",
   "description": "Automatically fill and submit forms on various websites",
   "permissions": [
+    "tabs",
     "activeTab",
-    "storage"
+    "storage",
+    "background",
+    "windows"
   ],
   "action": {
     "default_popup": "popup.html"

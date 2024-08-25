@@ -26,4 +26,31 @@ export function setupEventListeners(elements: ReturnType<typeof getElements>) {
 	if (elements.generateUserButton) {
 		elements.generateUserButton.addEventListener('click', () => handleGenerateUserClick(elements));
 	}
+
+	elements.pinPopupButton.addEventListener('click', () => {
+		chrome.windows.getCurrent({ populate: true }, window => {
+			const isPopupPinned = window.type === 'popup' && window.state === 'normal';
+
+			if (isPopupPinned) {
+				if (window.id !== undefined) {
+					chrome.windows.update(window.id, { state: 'minimized' });
+					elements.pinPopupButton.textContent = 'Fixar Pop-up';
+					localStorage.setItem('popupPinned', 'false');
+				}
+			} else {
+				chrome.windows.create(
+					{
+						url: chrome.runtime.getURL('popup.html'),
+						type: 'popup',
+						width: 400,
+						height: 600
+					},
+					newWindow => {
+						elements.pinPopupButton.textContent = 'Desfixar Pop-up';
+						localStorage.setItem('popupPinned', 'true');
+					}
+				);
+			}
+		});
+	});
 }
