@@ -12,6 +12,7 @@ export const fillForm = async (
 	options: {
 		predefinedPassword?: string;
 		useRandomPassword: boolean;
+		autoRegister: boolean;
 	}
 ): Promise<void> => {
 	logger.info(`Filling form with data: ${JSON.stringify(layout)}`);
@@ -32,10 +33,9 @@ export const fillForm = async (
 
 	await new Promise(resolve => setTimeout(resolve, 500));
 
-	try {
+	if (options.autoRegister) {
+		logger.info('Auto-register is enabled, triggering registration');
 		handleButtonWithSpan('Registro');
-	} catch (error) {
-		logger.error(`Error clicking button with span: Registro ${error}`);
 	}
 };
 

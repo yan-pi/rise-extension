@@ -31,7 +31,8 @@ export function handleGenerateUserClick(elements: ReturnType<typeof getElements>
 				layout: selectedLayout,
 				options: {
 					predefinedPassword: elements.predefinedPassword.value,
-					useRandomPassword: elements.useRandomPassword.checked
+					useRandomPassword: elements.useRandomPassword.checked,
+					autoRegister: elements.autoRegisterCheckbox.checked
 				}
 			});
 		});
