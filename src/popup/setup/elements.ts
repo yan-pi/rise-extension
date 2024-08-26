@@ -8,7 +8,8 @@ export function getElements() {
 		layoutSelector: document.getElementById('layoutSelector') as HTMLSelectElement,
 		predefinedPassword: document.getElementById('predefinedPassword') as HTMLInputElement,
 		useRandomPassword: document.getElementById('useRandomPassword') as HTMLInputElement,
-		autoRegisterCheckbox: document.getElementById('autoRegister') as HTMLInputElement
+		autoRegisterCheckbox: document.getElementById('autoRegister') as HTMLInputElement,
+		pinPopupButton: document.getElementById('pinPopupButton') as HTMLButtonElement
 	};
 }
 
